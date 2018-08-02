@@ -1,12 +1,4 @@
-extends KinematicBody2D
-
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-var maxSpeed = 300
-var accel = 20
-var friction = 25
-var motion = Vector2()
+extends "res://Character.gd"
 
 var up   =KEY_W
 var left =KEY_A
@@ -14,8 +6,6 @@ var down =KEY_S
 var right=KEY_D
 
 func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
 	pass
 	
 func _move():
@@ -65,8 +55,3 @@ func _move():
 	
 	move_and_slide(motion)
 	pass
-
-func _physics_process(delta):
-	_move()
-	pass
-#	
