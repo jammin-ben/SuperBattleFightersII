@@ -7,7 +7,7 @@ function Player:new (x,y,speed,up,down,left,right)
         x         = x,
         y         = y,
         speed     = speed,
-        animation = newAnimation(love.graphics.newImage("New Piskel.png"), 32, 32, 1),
+        animation = newAnimation(love.graphics.newImage("player_s.png"), 32, 32, 1),
         frame     = 1,
         xvel      = 0,
         yvel      = 0,
@@ -37,10 +37,12 @@ function Player:animate(dt)
         self.animation.currentTime = self.animation.currentTime-self.animation.duration
     end 
     self.frame = math.floor(self.animation.currentTime / self.animation.duration * #self.animation.quads)+1
-    if self.xvel>=0 
-        then self.angle = math.atan (self.yvel/self.xvel)
-        else self.angle = math.pi+ math.atan (self.yvel/self.xvel)
-    end 
+    if(math.abs(self.xvel)>0 or math.abs(self.yvel)>0) then --If moving, update angle
+        if self.xvel>=0 
+            then self.angle = math.atan (self.yvel/self.xvel)
+            else self.angle = math.pi + math.atan (self.yvel/self.xvel)
+        end 
+    end
 end
 
 function Player:checkForInput(dt)
