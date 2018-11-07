@@ -7,7 +7,7 @@ function Player:new (x,y,speed,up,down,left,right)
         x         = x,
         y         = y,
         speed     = speed,
-        animation = newAnimation(love.graphics.newImage("player_s.png"), 32, 32, 1),
+        animation = newAnimation(love.graphics.newImage("minotaur_s.png"), 64, 64, 1),
         frame     = 1,
         xvel      = 0,
         yvel      = 0,
@@ -39,8 +39,8 @@ function Player:animate(dt)
     self.frame = math.floor(self.animation.currentTime / self.animation.duration * #self.animation.quads)+1
     if(math.abs(self.xvel)>0 or math.abs(self.yvel)>0) then --If moving, update angle
         if self.xvel>=0 
-            then self.angle = math.atan (self.yvel/self.xvel)
-            else self.angle = math.pi + math.atan (self.yvel/self.xvel)
+            then self.angle = math.atan (self.yvel/self.xvel) - math.pi/2
+            else self.angle = math.pi + math.atan (self.yvel/self.xvel) - math.pi/2
         end 
     end
 end
