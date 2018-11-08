@@ -1,9 +1,16 @@
-Player = {x = 0, y = 0, speed = 1,  up = "up", down = "down", left = "left", right = "right"}
-
-function Player:new (x,y,speed,up,down,left,right)
+Player = {}
+-- Player = {
+--     x = 0,
+--     y = 0,
+--     speed = 1,
+--     up = "up",
+--     down = "down",
+--     left = "left",
+--     right = "right",
+-- }
+function Player:new (world, x, y, speed, up, down, left, right)
     self.__index = self 
-    
-    return setmetatable({
+    o = {
         x         = x,
         y         = y,
         speed     = speed,
@@ -15,12 +22,18 @@ function Player:new (x,y,speed,up,down,left,right)
         up        = up, 
         down      = down, 
         left      = left,
-        right     = right
-    },self)
+        right     = right,
+        body      = love.physics.newBody(world, x, y, "dynamic"),
+        shape     = love.physics.newRectangleShape(128, 128),
+        fixture   = nil
+    }
+    o.body:setMass(10)
+    o.fixture = love.physics.newFixture(o.body, o.shape)
+    setmetatable(o, self)
+    return o
 end
 
 function Player:toString()
-
     str = string.format("Pos:(%i,%i) Speed: %i Size: %i", self.x, self.y,self.speed,self.size)
     return str
 end
@@ -28,13 +41,13 @@ end
 function Player:move(dt)
     self.x = self.x + self.xvel*dt  
     self.y = self.y + self.yvel*dt
-
+    self.body:setPosition(self.x, self.y)
 end 
 
 function Player:animate(dt)
     self.animation.currentTime = self.animation.currentTime + dt
-    if self.animation.currentTime>=self.animation.duration then 
-        self.animation.currentTime = self.animation.currentTime-self.animation.duration
+    if self.animation.currentTime >= self.animation.duration then 
+        self.animation.currentTime = self.animation.currentTime - self.animation.duration
     end 
     self.frame = math.floor(self.animation.currentTime / self.animation.duration * #self.animation.quads)+1
     if(math.abs(self.xvel)>0 or math.abs(self.yvel)>0) then --If moving, update angle
@@ -67,5 +80,5 @@ function Player:step(dt)
     self:move(dt)
 end
 
-dudeManBro = Player:new(50,50,60,20,"up","down","left","right")
-return dudeManBro
+-- dudeManBro = Player:new(50,50,60,20,"up","down","left","right")
+-- return dudeManBro

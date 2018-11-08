@@ -2,14 +2,31 @@ require "animation_handler"
 require "player" 
 
 function love.load()
-
+    world = love.physics.newWorld(0, 0, true)
     love.graphics.setBackgroundColor( 255, 255, 100 )
-    Player   = Player:new(30 ,10,100,"w","s","a","d")
-    Player2  = Player:new(333,10,100,"i","k","j","l")
 
+    Player   = Player:new(world, 30 ,10, 100, "w", "s", "a", "d")
+    -- Player2  = Player:new(world, 333,10,100,"i","k","j","l")
+    Player2  = Player:new(world, 333, 10, 100, "up", "down", "left", "right")
+    world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 end
 
+function beginContact(a, b, coll)
+    print("contact has begun!!")
+end
+function endContact(a, b, coll)
+    print("contact has ended")
+end
+function preSolve(a, b, coll)
+    print("preSolve")
+end
+function postSolve(a, b, coll, normalimpulse, tangentimpulse)
+    -- print("postSolve")
+end
+
+
 function love.update(dt)
+    world:update(dt)
     Player:step(dt)
     Player2:step(dt)
 end
