@@ -36,12 +36,19 @@ function Player:move(dt)
     self.y = self.y + self.yvel*dt
     self.body:setPosition(self.x, self.y)
     --normalize angle between 0 and 2pi 
-    if(self.angle >=2*math.pi) then 
-        self.angle = self.angle - 2*math.pi 
-    end 
+    if(self.angle >= 2*math.pi) then self.angle = self.angle - 2*math.pi end 
+    if(self.angle <  0) then self.angle = self.angle + 2*math.pi end
     --turn 
     if(math.abs(self.angle - self.direction) > self.turnSpeed*dt) then 
-        if (math.abs(self.angle + self.turnSpeed*dt - self.direction) < math.abs(self.angle-self.direction)) then --if turning clockwise gets us closer:
+--        newAngleCW  = self.angle + self.turnSpeed*dt
+ --       newAngleCCW = self.angle - self.turnSpeed*dt 
+  --      if(newAngleCW >= 2*math.pi) then newAngleCW = newAngleCW - 2*math.pi end 
+   --     if(newAngleCCW < 0) then newAngleCCW = newAngleCCW + 2*math.pi end 
+        
+
+--        if (math.abs(self.angle + self.turnSpeed*dt - self.direction) < math.abs(self.angle-self.direction)) then --if turning clockwise gets us closer:
+        print(self.direction-self.angle)
+        if ((self.direction > self.angle and self.direction - self.angle <= math.pi) or (self.angle > self.direction and self.angle -self.direction > math.pi))then 
             self.angle = self.angle + self.turnSpeed*dt 
         else
             self.angle = self.angle - self.turnSpeed*dt 
