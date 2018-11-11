@@ -1,13 +1,4 @@
 Player = {}
--- Player = {
---     x = 0,
---     y = 0,
---     speed = 1,
---     up = "up",
---     down = "down",
---     left = "left",
---     right = "right",
--- }
 function Player:new (world, x, y, speed, up, down, left, right)
     self.__index = self 
     o = {

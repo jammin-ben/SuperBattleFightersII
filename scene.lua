@@ -1,6 +1,40 @@
+local class = require 'lib/middleclass'
+local uuid = require 'lib/uuid'
 Scene = class('Scene')
 
-function Scene:init()
+
+function Scene:initialize()
 	self.children = {}
-	print('scene has been created')
+end
+function Scene:addChild(child)
+	child.__sceneKey__ = uuid()
+	self.children[child.__sceneKey__] = child
+	return child
+end
+
+function Scene:removeChild(child)
+		self.children[child.__sceneKey__] = nil
+end
+
+function Scene:update(dt)
+	for k, v in pairs(self.children) do
+		self.children[k]:step(dt)
+	end
+end
+
+function Scene:draw()
+	for k, v in pairs(self.children) do
+		local child = self.children[k]
+		love.graphics.draw(
+			child.animation.spriteSheet,
+			child.animation.quads[child.frame],
+			child.x,
+			child.y,
+			child.angle,
+			1,
+			1,
+			64,
+			64
+		)
+	end
 end

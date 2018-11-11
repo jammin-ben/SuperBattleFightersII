@@ -1,18 +1,17 @@
-class = require('lib/middleclass/middleclass')
 require "animation_handler"
 require "player" 
 require 'scene'
 
 function love.load()
-    world = love.physics.newWorld(0, 0, true)
+    mainScene = Scene:new()
+    world = love.physics.newWorld(0, 0, false)
     love.graphics.setBackgroundColor( 255, 255, 100 )
 
-    Player   = Player:new(world, 30 ,10, 100, "w", "s", "a", "d")
-    -- Player2  = Player:new(world, 333,10,100,"i","k","j","l")
-    Player2  = Player:new(world, 333, 10, 100, "up", "down", "left", "right")
+    mainScene:addChild(Player:new(world, 30 ,10, 100, "w", "s", "a", "d"))
+    mainScene:addChild(Player:new(world, 333, 10, 100, "up", "down", "left", "right"))
     world:setCallbacks(beginContact, endContact, preSolve, postSolve)
-end
 
+end
 function beginContact(a, b, coll)
     print("contact has begun!!")
 end
@@ -20,7 +19,7 @@ function endContact(a, b, coll)
     print("contact has ended")
 end
 function preSolve(a, b, coll)
-    print("preSolve")
+    -- print("preSolve")
 end
 function postSolve(a, b, coll, normalimpulse, tangentimpulse)
     -- print("postSolve")
@@ -28,17 +27,32 @@ end
 
 function love.update(dt)
     world:update(dt)
-    Player:step(dt)
-    Player2:step(dt)
+    mainScene:update(dt)
 end
 
 function love.draw()
-    love.graphics.draw(Player.animation.spriteSheet, Player.animation.quads[Player.frame], Player.x,Player.y,Player.angle,1,1,64,64)
-    love.graphics.draw(Player2.animation.spriteSheet, Player2.animation.quads[Player2.frame], Player2.x,Player2.y,Player2.angle,1,1,64,64)
+    mainScene:draw()
+    -- drawDebugShapes()
 end
 
 function love.keypressed(key)
     if (key) == 'escape' then
         love.event.quit()
+    end
+end
+function drawDebugShapes()
+    for _, body in pairs(world:getBodyList()) do
+        for _, fixture in pairs(body:getFixtureList()) do
+            local shape = fixture:getShape()
+    
+            if shape:typeOf("CircleShape") then
+                local cx, cy = body:getWorldPoints(shape:getPoint())
+                love.graphics.circle("fill", cx, cy, shape:getRadius())
+            elseif shape:typeOf("PolygonShape") then
+                love.graphics.polygon("fill", body:getWorldPoints(shape:getPoints()))
+            else
+                love.graphics.line(body:getWorldPoints(shape:getPoints()))
+            end
+        end
     end
 end
