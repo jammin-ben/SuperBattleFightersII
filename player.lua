@@ -5,7 +5,7 @@ function Player:new (world, x, y, speed, up, down, left, right)
         x         = x,
         y         = y,
         speed     = speed,
-        animation = newAnimation(love.graphics.newImage("minotaur_s.png"), 128, 128, 1),
+        animation = newAnimation(love.graphics.newImage("Minotaur.png"), 64, 64, 2),
         frame     = 1,
         xvel      = 0,
         yvel      = 0,
