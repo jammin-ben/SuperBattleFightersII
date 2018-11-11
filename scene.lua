@@ -31,8 +31,8 @@ function Scene:draw()
 			child.x,
 			child.y,
 			child.angle,
-			1,
-			1,
+			2,
+			2,
 			32, --This is the offset for the center of the frame, we should figure out how to generalize it for different sized things
 			32
 		)
