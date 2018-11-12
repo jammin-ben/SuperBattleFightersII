@@ -35,19 +35,16 @@ function Player:move(dt)
     self.x = self.x + self.xvel*dt  
     self.y = self.y + self.yvel*dt
     self.body:setPosition(self.x, self.y)
+    self:rotate(dt)
+
+end 
+
+function Player:rotate(dt)
     --normalize angle between 0 and 2pi 
     if(self.angle >= 2*math.pi) then self.angle = self.angle - 2*math.pi end 
     if(self.angle <  0) then self.angle = self.angle + 2*math.pi end
     --turn 
     if(math.abs(self.angle - self.direction) > self.turnSpeed*dt) then 
---        newAngleCW  = self.angle + self.turnSpeed*dt
- --       newAngleCCW = self.angle - self.turnSpeed*dt 
-  --      if(newAngleCW >= 2*math.pi) then newAngleCW = newAngleCW - 2*math.pi end 
-   --     if(newAngleCCW < 0) then newAngleCCW = newAngleCCW + 2*math.pi end 
-        
-
---        if (math.abs(self.angle + self.turnSpeed*dt - self.direction) < math.abs(self.angle-self.direction)) then --if turning clockwise gets us closer:
-        print(self.direction-self.angle)
         if ((self.direction > self.angle and self.direction - self.angle <= math.pi) or (self.angle > self.direction and self.angle -self.direction > math.pi))then 
             self.angle = self.angle + self.turnSpeed*dt 
         else
@@ -57,7 +54,7 @@ function Player:move(dt)
         --at intended direction 
         self.angle = self.direction 
     end
-end 
+end
 
 function Player:animate(dt)
     self.animation.currentTime = self.animation.currentTime + dt
