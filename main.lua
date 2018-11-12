@@ -7,8 +7,8 @@ function love.load()
     world = love.physics.newWorld(0, 0, false)
     love.graphics.setBackgroundColor( 255, 255, 100 )
 
-    mainScene:addChild(Player:new(world, 30 ,10, 100, "w", "s", "a", "d"))
-    mainScene:addChild(Player:new(world, 333, 10, 100, "up", "down", "left", "right"))
+    mainScene:addChild(Player:new(world, 30 ,10, 100, "w", "s", "a", "d","Minotaur.png",64))
+    mainScene:addChild(Player:new(world, 333, 10, 100, "up", "down", "left", "right","Minotaur.png",64))
     world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 
 end

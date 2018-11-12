@@ -1,17 +1,19 @@
+local class = require 'lib/middleclass'
+local Character = class('Character')
 Player = {}
-function Player:new (world, x, y, speed, up, down, left, right)
+function Player:new (world, x, y, speed, up, down, left, right,sprite,size)
     self.__index = self 
     o = {
         x         = x,
         y         = y,
         speed     = speed,
-        animation = newAnimation(love.graphics.newImage("Minotaur.png"), 64, 64, 2),
+        animation = newAnimation(love.graphics.newImage(sprite), size, size, 2),
         frame     = 1,
         xvel      = 0,
         yvel      = 0,
         angle     = 0,
         direction = 0, --This refers to the intended direction
-        turnSpeed = 3, --Speed of turn, in radians per second (I think) 
+        turnSpeed = 3, --Speed of turn, in radians per second 
         up        = up, 
         down      = down, 
         left      = left,
