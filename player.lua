@@ -74,17 +74,6 @@ end
 
 Dude = Character:subclass('Dude')
 Bull = Character:subclass('Bull')
---[[
-function Dude:initialize(world, x, y, speed, up, down, left, right, sprite, size)
-    Character.initialize(self, world, x, y, speed, up, down, left, right, sprite, size)
-end
-function Bull:initialize(world, x, y, speed, up, down, left, right, sprite, size)
-    Character.initialize(self, world, x, y, speed, up, down, left, right, sprite, size)
-end]]--
-
-function Dude:move(dt)
-    Character.move(self,dt)
-end 
 
 function Bull:move(dt)
     self:rotate(dt)
@@ -106,18 +95,6 @@ function Bull:rotate(dt)
         --at intended direction 
         self.angle = self.direction 
     end
-end
-
-function Dude:animate(dt)
-    Character.animate(self,dt)
-end
-
-function Bull:animate(dt)
-    Character.animate(self,dt)
-end
-
-function Dude:checkForInput(dt)
-    Character.checkForInput(self,dt)
 end
 
 function Bull:checkForInputBull(dt)  --This function is designed to make movement feel bigger for the bull character, with turn speed accounted for
@@ -146,11 +123,3 @@ function Bull:checkForInputBull(dt)  --This function is designed to make movemen
     end 
     
 end 
-
-function Dude:step(dt)
-    Character.step(self,dt)
-end
-
-function Bull:step(dt)
-    Character.step(self,dt)
-end
