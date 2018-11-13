@@ -67,55 +67,31 @@ end
 
 function Character:step(dt)
     self:checkForInput(dt)
-    self:animate(dt)
     self:move(dt)
-    self:checkForInputBull(dt)
+    self:animate(dt)
+
 end
 
-
---Player = {}
-function Player:new (world, x, y, speed, up, down, left, right, sprite, size)
-    self.__index = self 
-    o = {
-        x         = x,
-        y         = y,
-        speed     = speed,
-        animation = newAnimation(love.graphics.newImage(sprite), size, size, 2),
-        frame     = 1,
-        xvel      = 0,
-        yvel      = 0,
-        angle     = 0,
-        direction = 0, --This refers to the intended direction
-        turnSpeed = 3, --Speed of turn, in radians per second 
-        up        = up, 
-        down      = down, 
-        left      = left,
-        right     = right,
-        body      = love.physics.newBody(world, x, y, "dynamic"),
-        shape     = love.physics.newRectangleShape(128, 128),
-        fixture   = nil,
-        size      = size
-    }
-    o.body:setMass(10)
-    o.fixture = love.physics.newFixture(o.body, o.shape)
-    setmetatable(o, self)
-    return o
+Dude = Character:subclass('Dude')
+Bull = Character:subclass('Bull')
+--[[
+function Dude:initialize(world, x, y, speed, up, down, left, right, sprite, size)
+    Character.initialize(self, world, x, y, speed, up, down, left, right, sprite, size)
 end
+function Bull:initialize(world, x, y, speed, up, down, left, right, sprite, size)
+    Character.initialize(self, world, x, y, speed, up, down, left, right, sprite, size)
+end]]--
 
-function Player:toString()
-    str = string.format("Pos:(%i,%i) Speed: %i Size: %i", self.x, self.y,self.speed,self.size)
-    return str
-end
-
-function Player:move(dt)
-    self.x = self.x + self.xvel*dt  
-    self.y = self.y + self.yvel*dt
-    self.body:setPosition(self.x, self.y)
-    self:rotate(dt)
-
+function Dude:move(dt)
+    Character.move(self,dt)
 end 
 
-function Player:rotate(dt)
+function Bull:move(dt)
+    self:rotate(dt)
+    Character.move(self,dt)
+end 
+
+function Bull:rotate(dt)
     --normalize angle between 0 and 2pi 
     if(self.angle >= 2*math.pi) then self.angle = self.angle - 2*math.pi end 
     if(self.angle <  0) then self.angle = self.angle + 2*math.pi end
@@ -126,44 +102,25 @@ function Player:rotate(dt)
         else
             self.angle = self.angle - self.turnSpeed*dt 
         end
-    else 
+    else
         --at intended direction 
         self.angle = self.direction 
     end
 end
 
-function Player:animate(dt)
-    self.animation.currentTime = self.animation.currentTime + dt
-    if self.animation.currentTime >= self.animation.duration then 
-        self.animation.currentTime = self.animation.currentTime - self.animation.duration
-    end 
-    self.frame = math.floor(self.animation.currentTime / self.animation.duration * #self.animation.quads)+1
---[[    if(math.abs(self.xvel)>0 or math.abs(self.yvel)>0) then --If moving, update angle
-        if self.xvel>=0 
-            then self.angle = math.atan (self.yvel/self.xvel) -- math.pi/2
-            else self.angle = math.pi + math.atan (self.yvel/self.xvel) -- math.pi/2
-        end 
-    end]]--
+function Dude:animate(dt)
+    Character.animate(self,dt)
 end
 
-function Player:checkForInput(dt)
-	if love.keyboard.isDown(self.right) then
-		self.xvel = self.speed
-	elseif love.keyboard.isDown(self.left) then 
-		self.xvel = -1 * self.speed  
-    else 
-        self.xvel = 0
-	end
-	if love.keyboard.isDown(self.down) then
-		self.yvel = self.speed
-	elseif love.keyboard.isDown(self.up) then 
-		self.yvel = -1 * self.speed 
-    else 
-        self.yvel = 0
-	end
+function Bull:animate(dt)
+    Character.animate(self,dt)
 end
 
-function Player:checkForInputBull(dt)  --This function is designed to make movement feel bigger for the bull character, with turn speed accounted for
+function Dude:checkForInput(dt)
+    Character.checkForInput(self,dt)
+end
+
+function Bull:checkForInputBull(dt)  --This function is designed to make movement feel bigger for the bull character, with turn speed accounted for
     if love.keyboard.isDown(self.right) then 
         if love.keyboard.isDown(self.up) then 
             self.direction = math.pi*7/4
@@ -190,12 +147,10 @@ function Player:checkForInputBull(dt)  --This function is designed to make movem
     
 end 
 
-function Player:step(dt)
-    self:checkForInput(dt)
-    self:animate(dt)
-    self:move(dt)
-    self:checkForInputBull(dt)
+function Dude:step(dt)
+    Character.step(self,dt)
 end
 
--- dudeManBro = Player:new(50,50,60,20,"up","down","left","right")
--- return dudeManBro
+function Bull:step(dt)
+    Character.step(self,dt)
+end

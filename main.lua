@@ -7,20 +7,24 @@ function love.load()
     world = love.physics.newWorld(0, 0, false)
     love.graphics.setBackgroundColor( 255, 255, 100 )
 
-    mainScene:addChild(Player:new(world, 30 ,10, 100, "w", "s", "a", "d","Minotaur.png",64))
-    mainScene:addChild(Player:new(world, 333, 10, 100, "up", "down", "left", "right","Minotaur.png",64))
+    mainScene:addChild(Bull:new(world, 30 ,10, 100, "w", "s", "a", "d","Minotaur.png",64))
+    mainScene:addChild(Dude:new(world, 333, 10, 200, "up", "down", "left", "right","player_s.png",32))
     world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 
 end
+
 function beginContact(a, b, coll)
     print("contact has begun!!")
 end
+
 function endContact(a, b, coll)
     print("contact has ended")
 end
+
 function preSolve(a, b, coll)
     -- print("preSolve")
 end
+
 function postSolve(a, b, coll, normalimpulse, tangentimpulse)
     -- print("postSolve")
 end
