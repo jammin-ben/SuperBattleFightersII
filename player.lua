@@ -23,37 +23,52 @@ function Character:initialize(world,x,y,speed,up,down,left,right,sprite,size)
     self.fixture   = love.physics.newFixture(self.body, self.shape)
 end
 
+function Character:step(dt)
+    self:checkForInput(dt)
+--    self:move(dt)
+    self:animate(dt)
+
+end
+
 function Character:checkForInput(dt)
     if love.keyboard.isDown(self.right) then 
         if love.keyboard.isDown(self.up) then 
             self.angle = math.pi*7/4
+            self:move(dt)
         elseif love.keyboard.isDown(self.down) then
             self.angle = math.pi /4
+            self:move(dt)
         else 
             self.angle = 0
+            self:move(dt)
         end 
             
     elseif love.keyboard.isDown(self.left) then 
         if love.keyboard.isDown(self.up) then 
             self.angle = math.pi*5/4
+            self:move(dt)
         elseif love.keyboard.isDown(self.down) then
             self.angle = math.pi *3/4
+            self:move(dt)
         else 
             self.angle = math.pi
+            self:move(dt)
         end
     elseif love.keyboard.isDown(self.down) then
         self.angle = math.pi/2
+        self:move(dt)
 
     elseif love.keyboard.isDown(self.up) then 
         self.angle = 3*math.pi/2
+        self:move(dt)
     end 
 end
 
 function Character:move(dt)
     self.xvel = math.cos(self.angle)*self.speed
     self.yvel = math.sin(self.angle)*self.speed 
-    self.x    = self.x + self.xvel*dt
-    self.y    = self.y + self.yvel*dt
+    self.x    = self.x + self.xvel  *dt
+    self.y    = self.y + self.yvel  *dt
     self.body:setPosition(self.x, self.y)
 end
 
@@ -65,12 +80,7 @@ function Character:animate(dt)
     self.frame = math.floor(self.animation.currentTime / self.animation.duration * #self.animation.quads)+1
 end
 
-function Character:step(dt)
-    self:checkForInput(dt)
-    self:move(dt)
-    self:animate(dt)
 
-end
 
 Dude = Character:subclass('Dude')
 Bull = Character:subclass('Bull')
@@ -97,29 +107,36 @@ function Bull:rotate(dt)
     end
 end
 
-function Bull:checkForInputBull(dt)  --This function is designed to make movement feel bigger for the bull character, with turn speed accounted for
+function Bull:checkForInput(dt)  --This function is designed to make movement feel bigger for the bull character, with turn speed accounted for
     if love.keyboard.isDown(self.right) then 
         if love.keyboard.isDown(self.up) then 
             self.direction = math.pi*7/4
+            self:move(dt)
         elseif love.keyboard.isDown(self.down) then
             self.direction = math.pi /4
+            self:move(dt)
         else 
             self.direction = 0
+            self:move(dt)
         end 
             
     elseif love.keyboard.isDown(self.left) then 
         if love.keyboard.isDown(self.up) then 
             self.direction = math.pi*5/4
+            self:move(dt)
         elseif love.keyboard.isDown(self.down) then
             self.direction = math.pi *3/4
+            self:move(dt)
         else 
             self.direction = math.pi
+            self:move(dt)
         end
     elseif love.keyboard.isDown(self.down) then
         self.direction = math.pi/2
-
+        self:move(dt)
     elseif love.keyboard.isDown(self.up) then 
         self.direction = 3*math.pi/2
+        self:move(dt)
     end 
     
 end 
