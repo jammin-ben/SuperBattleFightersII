@@ -9,8 +9,6 @@ function Character:initialize(world,x,y,speed,up,down,left,right,sprite,size)
     self.xvel      = 0
     self.yvel      = 0
     self.angle     = 0
-    self.direction = 0 --This refers to the intended direction
-    self.turnSpeed = 3 --Speed of turn, in radians per second 
     self.up        = up 
     self.down      = down 
     self.left      = left
@@ -25,7 +23,6 @@ end
 
 function Character:step(dt)
     self:checkForInput(dt)
---    self:move(dt)
     self:animate(dt)
 
 end
@@ -85,6 +82,11 @@ end
 Dude = Character:subclass('Dude')
 Bull = Character:subclass('Bull')
 
+function Bull:initialize(world,x,y,speed,up,down,left,right,sprite,size)
+    Character.initialize(self,world,x,y,speed,up,down,left,right,sprite,size)
+    self.direction = 0
+    self.turnSpeed = 3
+end
 function Bull:move(dt)
     self:rotate(dt)
     Character.move(self,dt)

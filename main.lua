@@ -5,7 +5,7 @@ require 'scene'
 function love.load()
     mainScene = Scene:new()
     world = love.physics.newWorld(0, 0, false)
-    love.graphics.setBackgroundColor( 255, 255, 100 )
+    love.graphics.setBackgroundColor( .1, .15, .4 )
 
     mainScene:addChild(Bull:new(world, 30 ,10, 100, "w", "s", "a", "d","Minotaur.png",64))
     mainScene:addChild(Dude:new(world, 333, 10, 200, "up", "down", "left", "right","player_s.png",32))
@@ -36,7 +36,7 @@ end
 
 function love.draw()
     mainScene:draw()
-    -- drawDebugShapes()
+    drawDebugShapes()
 end
 
 function love.keypressed(key)
