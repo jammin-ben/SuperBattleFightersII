@@ -25,16 +25,17 @@ end
 function Scene:draw()
 	for k, v in pairs(self.children) do
 		local child = self.children[k]
-		love.graphics.draw(
-			child.animation.spriteSheet,
-			child.animation.quads[child.frame],
-			child.x,
-			child.y,
-			child.angle,
-			2,
-			2,
-			child.size/2, --This is the offset for the center of the frame, we should figure out how to generalize it for different sized things
-			child.size/2
-		)
+        child:draw()
+--		love.graphics.draw(
+--			child.animation.spriteSheet,
+--			child.animation.quads[child.frame],
+--			child.x,
+--			child.y,
+--			child.angle,
+--			2,
+--			2,
+--			child.size/2, --This is the offset for the center of the frame, we should figure out how to generalize it for different sized things
+--			child.size/2
+--		)
 	end
 end

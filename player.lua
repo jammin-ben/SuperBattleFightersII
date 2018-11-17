@@ -1,33 +1,42 @@
 local class = require 'lib/middleclass'
 Character = class('Character')
-function Character:initialize(world,x,y,speed,up,down,left,right,sprite,size)
+function Character:initialize(world,x,y,speed,up,down,left,right,image,size)
     self.x = x 
     self.y = y
     self.speed =speed
-    self.animation = newAnimation(love.graphics.newImage(sprite), size, size, 2)
-    self.frame     = 1
-    self.xvel      = 0
-    self.yvel      = 0
-    self.angle     = 0
-    self.up        = up 
-    self.down      = down 
-    self.left      = left
-    self.right     = right
-    self.body      = love.physics.newBody(world, x, y, "dynamic")
-    self.shape     = love.physics.newRectangleShape(128, 128)
-    self.fixture   = nil
-    self.size      = size   
+--    self.animation = newAnimation(love.graphics.newImage(sprite), size, size, 2)
+    self.sprite     = Sprite:new(love.graphics.newImage(image),size,size)
+    self.sprite:setAnimation(1,12,1)
+    self.frame      = 1
+    self.xvel       = 0
+    self.yvel       = 0
+    self.angle      = 0
+    self.up         = up 
+    self.down       = down 
+    self.left       = left
+    self.right      = right
+    self.body       = love.physics.newBody(world, x, y, "dynamic")
+    self.shape      = love.physics.newRectangleShape(128, 128)
+    self.fixture    = nil
+    self.size       = size   
     self.body:setMass(10)
-    self.fixture   = love.physics.newFixture(self.body, self.shape)
+    self.fixture    = love.physics.newFixture(self.body, self.shape)
+--    self.actionTimer= 0
+    self.state      = "free" --Modelling movement as a simple finite state machine, with free and punching being the current states. 
 end
 
 function Character:step(dt)
-    self:checkForInput(dt)
-    self:animate(dt)
-
+    if(self.state == "free") then 
+        self:checkForInput(dt)
+        self:animate(dt)
+    end 
+--    elseif(self.state == "attacking") then 
+--        self:attack(dt)
+--    end 
 end
 
 function Character:checkForInput(dt)
+
     if love.keyboard.isDown(self.right) then 
         if love.keyboard.isDown(self.up) then 
             self.angle = math.pi*7/4
@@ -59,6 +68,8 @@ function Character:checkForInput(dt)
         self.angle = 3*math.pi/2
         self:move(dt)
     end 
+    
+
 end
 
 function Character:move(dt)
@@ -67,17 +78,34 @@ function Character:move(dt)
     self.x    = self.x + self.xvel  *dt
     self.y    = self.y + self.yvel  *dt
     self.body:setPosition(self.x, self.y)
+    
 end
+
+--function Character:attack(dt)
+    
+
+--end
 
 function Character:animate(dt)
-    self.animation.currentTime = self.animation.currentTime + dt
-    if self.animation.currentTime >= self.animation.duration then 
-        self.animation.currentTime = self.animation.currentTime - self.animation.duration
-    end 
-    self.frame = math.floor(self.animation.currentTime / self.animation.duration * #self.animation.quads)+1
+--    if(self.state == "free") then 
+--        self.animation.currentTime = self.animation.currentTime + dt
+ --       if self.animation.currentTime >= self.animation.duration then 
+  --          self.animation.currentTime = self.animation.currentTime - self.animation.duration
+   --     end\
+    self.sprite:animate(dt)
+--    end
+--    self.frame = math.floor(self.animation.currentTime / self.animation.duration * #self.animation.quads)+1
 end
 
+function Character:draw()
+    x= self.x 
+    local y= self.y
+    local angle = self.angle 
+    local size = self.size 
+    
+    self.sprite:draw(x,y,angle,size)
 
+end 
 
 Dude = Character:subclass('Dude')
 Bull = Character:subclass('Bull')
@@ -140,5 +168,9 @@ function Bull:checkForInput(dt)  --This function is designed to make movement fe
         self.direction = 3*math.pi/2
         self:move(dt)
     end 
+        
+    if love.keyboard.isDown('p') then 
     
+        self.sprite:setAnimation(13,17,.5)
+    end 
 end 
