@@ -21,14 +21,14 @@ function Character:initialize(world,x,y,speed,up,down,left,right,image,size)
     self.body:setMass(10)
     self.fixture     = love.physics.newFixture(self.body, self.shape)
     self.actionTimer = 0
-    self.state       = "free" --Modelling movement as a simple finite state machine, with free and punching being the current states. 
+    self.state       = "free" --Modelling movement as a simple finite state machine, with free and action being the possible states. 
 end
 
 function Character:step(dt)
     if(self.state == "free") then 
         self:checkForInput(dt)
-    elseif(self.state == "attack") then 
-        self:attackStep(dt)
+    elseif(self.state == "action") then 
+        self:actionStep(dt)
     end 
     self:animate(dt)
 end
@@ -80,19 +80,24 @@ function Character:move(dt)
 end
 
 
-function Character:attack()
-    self.state = "attack"
+function Character:attack(dt)
+    self.state = "action"
     self.actionTimer = .5
-    self.sprite:setAnimation(13,17,self.actionTimer)
-    
+    self.sprite:setAnimation(13,17,self.actionTimer+.05)  --Dirty fix for race condition
+--    self.sprite:animate(dt)
 end
 
-function Character:attackStep(dt)
-    self.actionTimer = self.actionTimer - dt 
-    print(self.actionTimer)
+function Character:actionStep(dt) 
+    --self.actionTimer = self.sprite.duration - self.sprite.currentTime
+    
+    self.actionTimer = self.actionTimer - dt
+    
+    
     if (self.actionTimer <= 0) then 
+        print(self.sprite.frame)
         self.state = "free"
         self.sprite:setAnimation(1,12,1)
+        print(self.sprite.frame)
     end
 end
 
@@ -140,6 +145,7 @@ function Bull:rotate(dt)
     end
 end
 
+--Violates DRY (dont repeat yourself) 
 function Bull:checkForInput(dt)  --This function is designed to make movement feel bigger for the bull character, with turn speed accounted for
     if love.keyboard.isDown(self.right) then 
         if love.keyboard.isDown(self.up) then 
@@ -173,7 +179,7 @@ function Bull:checkForInput(dt)  --This function is designed to make movement fe
     end 
         
     if love.keyboard.isDown('p') then 
-        self:attack()
+        self:attack(dt)
        -- self.sprite:setAnimation(13,17,.5)
     end 
 end 

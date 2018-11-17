@@ -26,10 +26,11 @@ end
 
 function Sprite:setAnimation(firstFrame,lastFrame,duration)
     self.quads = {}
-    self.currentTime = 0
     for i=firstFrame,lastFrame do 
         table.insert(self.quads,self.frames[i])
     end 
+    
+    self.currentTime = 0
     self.duration = duration
     self.frame = firstFrame
 end 
