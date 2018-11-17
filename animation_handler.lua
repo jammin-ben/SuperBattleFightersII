@@ -31,6 +31,7 @@ function Sprite:setAnimation(firstFrame,lastFrame,duration)
         table.insert(self.quads,self.frames[i])
     end 
     self.duration = duration
+    self.frame = firstFrame
 end 
 
 function Sprite:animate(dt)
