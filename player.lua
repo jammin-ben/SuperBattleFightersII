@@ -4,35 +4,33 @@ function Character:initialize(world,x,y,speed,up,down,left,right,image,size)
     self.x = x 
     self.y = y
     self.speed =speed
---    self.animation = newAnimation(love.graphics.newImage(sprite), size, size, 2)
     self.sprite     = Sprite:new(love.graphics.newImage(image),size,size)
     self.sprite:setAnimation(1,12,1)
-    self.frame      = 1
-    self.xvel       = 0
-    self.yvel       = 0
-    self.angle      = 0
-    self.up         = up 
-    self.down       = down 
-    self.left       = left
-    self.right      = right
-    self.body       = love.physics.newBody(world, x, y, "dynamic")
-    self.shape      = love.physics.newRectangleShape(128, 128)
-    self.fixture    = nil
-    self.size       = size   
+    self.frame       = 1
+    self.xvel        = 0
+    self.yvel        = 0
+    self.angle       = 0
+    self.up          = up 
+    self.down        = down 
+    self.left        = left
+    self.right       = right
+    self.body        = love.physics.newBody(world, x, y, "dynamic")
+    self.shape       = love.physics.newRectangleShape(128, 128)
+    self.fixture     = nil
+    self.size        = size   
     self.body:setMass(10)
-    self.fixture    = love.physics.newFixture(self.body, self.shape)
---    self.actionTimer= 0
-    self.state      = "free" --Modelling movement as a simple finite state machine, with free and punching being the current states. 
+    self.fixture     = love.physics.newFixture(self.body, self.shape)
+    self.actionTimer = 0
+    self.state       = "free" --Modelling movement as a simple finite state machine, with free and punching being the current states. 
 end
 
 function Character:step(dt)
     if(self.state == "free") then 
         self:checkForInput(dt)
-        self:animate(dt)
+    elseif(self.state == "attack") then 
+        self:attackStep(dt)
     end 
---    elseif(self.state == "attacking") then 
---        self:attack(dt)
---    end 
+    self:animate(dt)
 end
 
 function Character:checkForInput(dt)
@@ -81,20 +79,25 @@ function Character:move(dt)
     
 end
 
---function Character:attack(dt)
-    
 
---end
+function Character:attack()
+    self.state = "attack"
+    self.actionTimer = .5
+    self.sprite:setAnimation(13,17,self.actionTimer)
+    
+end
+
+function Character:attackStep(dt)
+    self.actionTimer = self.actionTimer - dt 
+    print(self.actionTimer)
+    if (self.actionTimer <= 0) then 
+        self.state = "free"
+        self.sprite:setAnimation(1,12,1)
+    end
+end
 
 function Character:animate(dt)
---    if(self.state == "free") then 
---        self.animation.currentTime = self.animation.currentTime + dt
- --       if self.animation.currentTime >= self.animation.duration then 
-  --          self.animation.currentTime = self.animation.currentTime - self.animation.duration
-   --     end\
-    self.sprite:animate(dt)
---    end
---    self.frame = math.floor(self.animation.currentTime / self.animation.duration * #self.animation.quads)+1
+   self.sprite:animate(dt)
 end
 
 function Character:draw()
@@ -170,7 +173,7 @@ function Bull:checkForInput(dt)  --This function is designed to make movement fe
     end 
         
     if love.keyboard.isDown('p') then 
-    
-        self.sprite:setAnimation(13,17,.5)
+        self:attack()
+       -- self.sprite:setAnimation(13,17,.5)
     end 
 end 
