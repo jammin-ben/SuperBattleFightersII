@@ -1,10 +1,10 @@
 local class = require 'lib/middleclass'
 Character = class('Character')
 function Character:initialize(world,x,y,speed,up,down,left,right,image,size)
-    self.x = x 
-    self.y = y
-    self.speed =speed
-    self.sprite     = Sprite:new(love.graphics.newImage(image),size,size)
+    self.x           = x 
+    self.y           = y
+    self.speed       =speed
+    self.sprite      = Sprite:new(love.graphics.newImage(image),size,size)
     self.sprite:setAnimation(1,12,1)
     self.frame       = 1
     self.xvel        = 0
@@ -74,6 +74,7 @@ function Character:move(dt)
     self.xvel = math.cos(self.angle)*self.speed
     self.yvel = math.sin(self.angle)*self.speed 
     self.x    = self.x + self.xvel  *dt
+    
     self.y    = self.y + self.yvel  *dt
     self.body:setPosition(self.x, self.y)
     
@@ -83,21 +84,20 @@ end
 function Character:attack(dt)
     self.state = "action"
     self.actionTimer = .5
-    self.sprite:setAnimation(13,17,self.actionTimer+.05)  --Dirty fix for race condition
---    self.sprite:animate(dt)
+    if(love.math.random() > .5) then
+        self.sprite:setAnimation(13,17,self.actionTimer)--+ .05)  --Dirty fix for race condition
+    else 
+        self.sprite:setAnimation(18,22,self.actionTimer)
+    end
+    self.actionTimer = self.actionTimer - dt --New fix attempt, a little less dirty
+
 end
 
 function Character:actionStep(dt) 
-    --self.actionTimer = self.sprite.duration - self.sprite.currentTime
-    
     self.actionTimer = self.actionTimer - dt
-    
-    
     if (self.actionTimer <= 0) then 
-        print(self.sprite.frame)
         self.state = "free"
         self.sprite:setAnimation(1,12,1)
-        print(self.sprite.frame)
     end
 end
 
@@ -106,12 +106,8 @@ function Character:animate(dt)
 end
 
 function Character:draw()
-    x= self.x 
-    local y= self.y
-    local angle = self.angle 
-    local size = self.size 
-    
-    self.sprite:draw(x,y,angle,size)
+
+    self.sprite:draw(self.x,self.y,self.angle,self.size)
 
 end 
 
@@ -180,6 +176,5 @@ function Bull:checkForInput(dt)  --This function is designed to make movement fe
         
     if love.keyboard.isDown('p') then 
         self:attack(dt)
-       -- self.sprite:setAnimation(13,17,.5)
     end 
 end 

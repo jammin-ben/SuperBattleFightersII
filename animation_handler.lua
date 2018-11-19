@@ -8,9 +8,6 @@ function Sprite:initialize(img,width,height)
 --    self.numFrames = img:getHeight() * img:getWidth() / (width*height)
     
     self.frames   = {}
-    print(img)
-      
-    print(img:getHeight())
     for y = 0, img:getHeight() - height, height do
         for x = 0, img:getWidth() - width, width do
             table.insert(self.frames, love.graphics.newQuad(x, y, width, height, img:getDimensions()))
@@ -58,9 +55,6 @@ function Sprite:draw(x,y,angle,size)
 end
 
 
-
-
-
 --[[function newAnimation(image, width, height, duration)
     local animation = {}
     animation.spriteSheet = image;
@@ -77,4 +71,3 @@ end
  
     return animation
 end]]--
-

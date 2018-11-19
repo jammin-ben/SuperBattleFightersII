@@ -30,8 +30,10 @@ function postSolve(a, b, coll, normalimpulse, tangentimpulse)
 end
 
 function love.update(dt)
+
     world:update(dt)
     mainScene:update(dt)
+
 end
 
 function love.draw()
