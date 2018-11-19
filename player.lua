@@ -21,7 +21,8 @@ function Character:initialize(world,x,y,speed,up,down,left,right,image,size)
     self.body:setMass(10)
     self.fixture     = love.physics.newFixture(self.body, self.shape)
     self.actionTimer = 0
-    self.state       = "free" --Modelling movement as a simple finite state machine, with free and action being the possible states. 
+    self.state       = "free" --Modelling movement as a simple finite state machine, with free and action being the possible states.
+    self.punchSide   = 1 --This alternates the punch
 end
 
 function Character:step(dt)
@@ -84,10 +85,12 @@ end
 function Character:attack(dt)
     self.state = "action"
     self.actionTimer = .5
-    if(love.math.random() > .5) then
+    if(self.punchSide > 0) then
         self.sprite:setAnimation(13,17,self.actionTimer)--+ .05)  --Dirty fix for race condition
+        self.punchSide = self.punchSide * -1
     else 
         self.sprite:setAnimation(18,22,self.actionTimer)
+        self.punchSide = self.punchSide * -1
     end
     self.actionTimer = self.actionTimer - dt --New fix attempt, a little less dirty
 
