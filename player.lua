@@ -23,6 +23,7 @@ function Character:initialize(world,x,y,speed,up,down,left,right,image,size)
     self.actionTimer = 0
     self.state       = "free" --Modelling movement as a simple finite state machine, with free and action being the possible states.
     self.punchSide   = 1 --This alternates the punch
+    self.attackKey = "p"
     self.moving = false
 end
 
@@ -51,7 +52,8 @@ function Character:checkForInput(dt)
         love.keyboard.isDown(self.up) or
         love.keyboard.isDown(self.down) or
         love.keyboard.isDown(self.left) or
-        love.keyboard.isDown(self.right)
+        love.keyboard.isDown(self.right) or
+        love.keyboard.isDown(self.attackKey)
     then
         self.moving = true
     else
@@ -143,7 +145,6 @@ function Character:animate(dt)
 end
 
 function Character:draw()
-    print(self.x, self.y, self.angle, self.size)
     self.sprite:draw(self.x, self.y, self.angle, self.size)
 end 
 
