@@ -1,6 +1,7 @@
 require "animation_handler"
 require "player" 
 require 'scene'
+require 'Bull'
 
 function love.load()
     mainScene = Scene:new()
