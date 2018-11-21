@@ -35,38 +35,91 @@ function Character:step(dt)
 end
 
 function Character:checkForInput(dt)
+    local ANGLE_UP_RIGHT = math.pi * 7 / 4
+    local ANGLE_UP_LEFT = math.pi * 5 / 4
+    local ANGLE_DOWN_RIGHT = math.pi / 4
+    local ANGLE_DOWN_LEFT = math.pi * 3 / 4
+    local ANGLE_DOWN = math.pi / 2
+    local ANGLE_UP = 3 * math.pi / 2
+    local ANGLE_RIGHT = 0
+    local ANGLE_LEFT = math.pi
 
+    -- RIGHT_X
     if love.keyboard.isDown(self.right) then 
+        -- RIGHT_UP
         if love.keyboard.isDown(self.up) then 
-            self.angle = math.pi*7/4
+            self.direction = ANGLE_UP_RIGHT
             self:move(dt)
+        -- RIGHT_DOWN
         elseif love.keyboard.isDown(self.down) then
-            self.angle = math.pi /4
+            self.direction = ANGLE_DOWN_RIGHT
             self:move(dt)
+        -- RIGHT
         else 
-            self.angle = 0
+            self.direction = ANGLE_RIGHT
             self:move(dt)
         end 
             
+    -- LEFT_X
     elseif love.keyboard.isDown(self.left) then 
+        -- LEFT_UP
         if love.keyboard.isDown(self.up) then 
-            self.angle = math.pi*5/4
+            self.direction = ANGLE_UP_LEFT
             self:move(dt)
+        -- LEFT_DOWN
         elseif love.keyboard.isDown(self.down) then
-            self.angle = math.pi *3/4
+            self.direction = ANGLE_DOWN_LEFT
             self:move(dt)
+        -- LEFT
         else 
-            self.angle = math.pi
+            self.direction = ANGLE_LEFT
             self:move(dt)
         end
+    -- DOWN
     elseif love.keyboard.isDown(self.down) then
-        self.angle = math.pi/2
+        self.direction = ANGLE_DOWN
         self:move(dt)
-
+    -- UP
     elseif love.keyboard.isDown(self.up) then 
-        self.angle = 3*math.pi/2
+        self.direction = ANGLE_UP
         self:move(dt)
     end 
+        
+    if love.keyboard.isDown('p') then 
+        self:attack(dt)
+    end 
+
+    -- if love.keyboard.isDown(self.right) then 
+    --     if love.keyboard.isDown(self.up) then 
+    --         self.angle = math.pi*7/4
+    --         self:move(dt)
+    --     elseif love.keyboard.isDown(self.down) then
+    --         self.angle = math.pi /4
+    --         self:move(dt)
+    --     else 
+    --         self.angle = 0
+    --         self:move(dt)
+    --     end 
+            
+    -- elseif love.keyboard.isDown(self.left) then 
+    --     if love.keyboard.isDown(self.up) then 
+    --         self.angle = math.pi*5/4
+    --         self:move(dt)
+    --     elseif love.keyboard.isDown(self.down) then
+    --         self.angle = math.pi *3/4
+    --         self:move(dt)
+    --     else 
+    --         self.angle = math.pi
+    --         self:move(dt)
+    --     end
+    -- elseif love.keyboard.isDown(self.down) then
+    --     self.angle = math.pi/2
+    --     self:move(dt)
+
+    -- elseif love.keyboard.isDown(self.up) then 
+    --     self.angle = 3*math.pi/2
+    --     self:move(dt)
+    -- end 
     
 
 end
