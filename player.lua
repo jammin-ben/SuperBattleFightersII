@@ -23,6 +23,7 @@ function Character:initialize(world,x,y,speed,up,down,left,right,image,size)
     self.actionTimer = 0
     self.state       = "free" --Modelling movement as a simple finite state machine, with free and action being the possible states.
     self.punchSide   = 1 --This alternates the punch
+    self.moving = false
 end
 
 function Character:step(dt)
@@ -31,7 +32,9 @@ function Character:step(dt)
     elseif(self.state == "action") then 
         self:actionStep(dt)
     end 
-    self:animate(dt)
+    if (self.moving) then
+        self:animate(dt)
+    end
 end
 
 function Character:checkForInput(dt)
@@ -43,6 +46,17 @@ function Character:checkForInput(dt)
     local ANGLE_UP = 3 * math.pi / 2
     local ANGLE_RIGHT = 0
     local ANGLE_LEFT = math.pi
+
+    if
+        love.keyboard.isDown(self.up) or
+        love.keyboard.isDown(self.down) or
+        love.keyboard.isDown(self.left) or
+        love.keyboard.isDown(self.right)
+    then
+        self.moving = true
+    else
+        self.moving = false
+    end
 
     -- RIGHT_X
     if love.keyboard.isDown(self.right) then 
@@ -89,39 +103,6 @@ function Character:checkForInput(dt)
         self:attack(dt)
     end 
 
-    -- if love.keyboard.isDown(self.right) then 
-    --     if love.keyboard.isDown(self.up) then 
-    --         self.angle = math.pi*7/4
-    --         self:move(dt)
-    --     elseif love.keyboard.isDown(self.down) then
-    --         self.angle = math.pi /4
-    --         self:move(dt)
-    --     else 
-    --         self.angle = 0
-    --         self:move(dt)
-    --     end 
-            
-    -- elseif love.keyboard.isDown(self.left) then 
-    --     if love.keyboard.isDown(self.up) then 
-    --         self.angle = math.pi*5/4
-    --         self:move(dt)
-    --     elseif love.keyboard.isDown(self.down) then
-    --         self.angle = math.pi *3/4
-    --         self:move(dt)
-    --     else 
-    --         self.angle = math.pi
-    --         self:move(dt)
-    --     end
-    -- elseif love.keyboard.isDown(self.down) then
-    --     self.angle = math.pi/2
-    --     self:move(dt)
-
-    -- elseif love.keyboard.isDown(self.up) then 
-    --     self.angle = 3*math.pi/2
-    --     self:move(dt)
-    -- end 
-    
-
 end
 
 function Character:move(dt)
@@ -162,9 +143,8 @@ function Character:animate(dt)
 end
 
 function Character:draw()
-
-    self.sprite:draw(self.x,self.y,self.angle,self.size)
-
+    print(self.x, self.y, self.angle, self.size)
+    self.sprite:draw(self.x, self.y, self.angle, self.size)
 end 
 
 Dude = Character:subclass('Dude')
