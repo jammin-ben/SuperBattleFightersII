@@ -16,7 +16,7 @@ function Character:initialize(world,x,y,speed,up,down,left,right,image,size)
     self.right       = right
     self.body        = love.physics.newBody(world, x, y, "dynamic")
     self.shape       = love.physics.newRectangleShape(128, 128)
-    self.fixture     = nil
+    self.fixture     = nil 
     self.size        = size   
     self.body:setMass(10)
     self.fixture     = love.physics.newFixture(self.body, self.shape)
