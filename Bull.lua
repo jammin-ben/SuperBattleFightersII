@@ -8,9 +8,9 @@ function Bull:initialize(world, x, y, speed, up, down, left, right, sprite, size
     self.turnSpeed = 3
     -- self.turnSpeed = 40
 end
-function Bull:move(dt)
+function Bull:walk(dt)
     self:rotate(dt)
-    Character.move(self, dt)
+    Character.walk(self, dt)
 end 
 
 function Bull:rotate(dt)

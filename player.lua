@@ -3,7 +3,7 @@ Character = class('Character')
 function Character:initialize(world,x,y,speed,up,down,left,right,image,size)
     self.x           = x 
     self.y           = y
-    self.speed       =speed
+    self.speed       = speed
     self.sprite      = Sprite:new(love.graphics.newImage(image),size,size)
     self.sprite:setAnimation(1,12,1)
     self.frame       = 1
@@ -15,7 +15,7 @@ function Character:initialize(world,x,y,speed,up,down,left,right,image,size)
     self.left        = left
     self.right       = right
     self.body        = love.physics.newBody(world, x, y, "dynamic")
-    self.shape       = love.physics.newRectangleShape(128, 128)
+    self.shape       = love.physics.newRectangleShape(96, 96)
     self.fixture     = nil 
     self.size        = size   
     self.body:setMass(10)
@@ -28,6 +28,7 @@ function Character:initialize(world,x,y,speed,up,down,left,right,image,size)
 end
 
 function Character:step(dt)
+    self:move()
     if(self.state == "free") then 
         self:checkForInput(dt)
     elseif(self.state == "action") then 
@@ -36,6 +37,7 @@ function Character:step(dt)
     if (self.moving) then
         self:animate(dt)
     end
+
 end
 
 function Character:checkForInput(dt)
@@ -65,15 +67,15 @@ function Character:checkForInput(dt)
         -- RIGHT_UP
         if love.keyboard.isDown(self.up) then 
             self.direction = ANGLE_UP_RIGHT
-            self:move(dt)
+            self:walk(dt)
         -- RIGHT_DOWN
         elseif love.keyboard.isDown(self.down) then
             self.direction = ANGLE_DOWN_RIGHT
-            self:move(dt)
+            self:walk(dt)
         -- RIGHT
         else 
             self.direction = ANGLE_RIGHT
-            self:move(dt)
+            self:walk(dt)
         end 
             
     -- LEFT_X
@@ -81,24 +83,24 @@ function Character:checkForInput(dt)
         -- LEFT_UP
         if love.keyboard.isDown(self.up) then 
             self.direction = ANGLE_UP_LEFT
-            self:move(dt)
+            self:walk(dt)
         -- LEFT_DOWN
         elseif love.keyboard.isDown(self.down) then
             self.direction = ANGLE_DOWN_LEFT
-            self:move(dt)
+            self:walk(dt)
         -- LEFT
         else 
             self.direction = ANGLE_LEFT
-            self:move(dt)
+            self:walk(dt)
         end
     -- DOWN
     elseif love.keyboard.isDown(self.down) then
         self.direction = ANGLE_DOWN
-        self:move(dt)
+        self:walk(dt)
     -- UP
     elseif love.keyboard.isDown(self.up) then 
         self.direction = ANGLE_UP
-        self:move(dt)
+        self:walk(dt)
     end 
         
     if love.keyboard.isDown('p') then 
@@ -107,16 +109,20 @@ function Character:checkForInput(dt)
 
 end
 
-function Character:move(dt)
+function Character:walk(dt)
     self.xvel = math.cos(self.angle)*self.speed
     self.yvel = math.sin(self.angle)*self.speed 
-    self.x    = self.x + self.xvel  *dt
+    self.body:setPosition(self.x + self.xvel*dt, self.y+self.yvel*dt)
+--    self.x    = self.x + self.xvel  *dt
     
-    self.y    = self.y + self.yvel  *dt
-    self.body:setPosition(self.x, self.y)
+--    self.y    = self.y + self.yvel  *dt
+    --self.body:setPosition(self.x, self.y)
     
 end
 
+function Character:move() --Separating walk and move because this way movement is updated when you are pushed
+    self.x , self.y = self.body:getPosition()
+end
 
 function Character:attack(dt)
     self.state = "action"
@@ -146,6 +152,7 @@ end
 
 function Character:draw()
     self.sprite:draw(self.x, self.y, self.angle, self.size)
+    --love.graphics.rectangle("fill", self.x, self.y, self.size, self.size) --Testing where x actually is
 end 
 
 Dude = Character:subclass('Dude')
