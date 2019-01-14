@@ -15,16 +15,16 @@ function Character:initialize(world,x,y,speed,up,down,left,right,image,size)
     self.left        = left
     self.right       = right
     self.body        = love.physics.newBody(world, x, y, "dynamic")
-    self.shape       = love.physics.newRectangleShape(96, 96)
-    self.fixture     = nil 
+    self.shape       = love.physics.newRectangleShape(66, 66)
+  --  self.fixture     = nil 
     self.size        = size   
     self.body:setMass(10)
     self.fixture     = love.physics.newFixture(self.body, self.shape)
     self.actionTimer = 0
     self.state       = "free" --Modelling movement as a simple finite state machine, with free and action being the possible states.
     self.punchSide   = 1 --This alternates the punch
-    self.attackKey = "p"
-    self.moving = false
+    self.attackKey   = "p"
+    self.moving      = false
 end
 
 function Character:step(dt)
@@ -127,6 +127,11 @@ end
 function Character:attack(dt)
     self.state = "action"
     self.actionTimer = .5
+	self.hbbody    = love.physics.newBody(world, self.x, self.y-120, "static") --hurtbox
+	self.hbshape   = love.physics.newRectangleShape(20, 20)
+    self.hbfixture = love.physics.newFixture(self.hbbody, self.hbshape)
+	
+	
     if(self.punchSide > 0) then
         self.sprite:setAnimation(13,17,self.actionTimer)--+ .05)  --Dirty fix for race condition
         self.punchSide = self.punchSide * -1
@@ -142,6 +147,7 @@ function Character:actionStep(dt)
     self.actionTimer = self.actionTimer - dt
     if (self.actionTimer <= 0) then 
         self.state = "free"
+		self.hbbody:destroy()
         self.sprite:setAnimation(1,12,1)
     end
 end
