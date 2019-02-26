@@ -12,4 +12,3 @@ if !collision_rectangle(r+xvel,t+yvel,l+xvel,b+yvel,Wall,0,1){
 	me.y+=yvel
 }
 //return collision_rectangle(r+xvel,t+yvel,l+xvel,b+yvel,Wall,0,1)
-	

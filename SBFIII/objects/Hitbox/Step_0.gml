@@ -12,7 +12,7 @@ if _num > 0
         {
 		if searchList(enemies,_list[| i])
 			{
-				getHit(_list[| i])
+				getHit(_list[| i],angle)
 			}
 		}
     }

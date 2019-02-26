@@ -53,4 +53,7 @@ if(free){
 	else
 		curr_animation=[0,1]
 }
+if(knockbackVel!=[0,0])
+	applyKnockback()
+	
 animate()

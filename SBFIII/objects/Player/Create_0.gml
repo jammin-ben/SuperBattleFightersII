@@ -7,10 +7,11 @@ image_yscale=3
 curr_animation=[0,1]
 free = true
 arm = 1 //1 represents right arm. -1 represents left arm
-hp = 3
+hp = 6
 invincible=false
 iFrames=35
 col=c_white
+knockbackVel = [0,0]
 
 upkey=ord("W")
 downkey=ord("S")
