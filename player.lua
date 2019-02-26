@@ -103,7 +103,7 @@ function Character:checkForInput(dt)
         self:walk(dt)
     end 
         
-    if love.keyboard.isDown('p') then 
+    if love.keyboard.isDown(self.attackKey) then 
         self:attack(dt)
     end 
 

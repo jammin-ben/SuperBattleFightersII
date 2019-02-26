@@ -8,10 +8,10 @@ require 'wall'
 function love.load()
     mainScene = Scene:new()
     world = love.physics.newWorld(0, 0, false)
-    love.graphics.setBackgroundColor( 25/255, 150/255, 65/255 )
+    love.graphics.setBackgroundColor( 51/255, 152/255, 102/255 )
 
-    mainScene:addChild(Bull:new(world, 150 ,150, 100, "w", "s", "a", "d","Minotaur.png",64))
-    mainScene:addChild(Bull:new(world, 650 ,450, 100, "up", "down", "left", "right","Minotaur.png",64))
+    mainScene:addChild(Bull:new(world, 150 ,150, 100, "w", "s", "a", "d","Minotaur.png",64,"e"))
+    mainScene:addChild(Bull:new(world, 650 ,450, 100, "up", "down", "left", "right","Minotaur.png",64,"p"))
     for x = 0, 800, 96 do 
 		mainScene:addChild(Wall:new(world,x,0))
 		mainScene:addChild(Wall:new(world,x,600))
