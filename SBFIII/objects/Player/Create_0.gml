@@ -7,11 +7,14 @@ image_yscale=3
 curr_animation=[0,1]
 free = true
 arm = 1 //1 represents right arm. -1 represents left arm
-hp = 6
+maxHp=4
+hp = maxHp
 invincible=false
 iFrames=35
 col=c_white
 knockbackVel = [0,0]
+team=1 //Currently only used for drawing heart sprites
+
 
 upkey=ord("W")
 downkey=ord("S")

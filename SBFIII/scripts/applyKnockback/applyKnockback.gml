@@ -14,8 +14,6 @@ else{
 	knockbackVel[0]=0	
 	knockbackVel[1]=0
 }
-	show_debug_message("I'm at a wall!")
-
 if(abs(knockbackVel[0])>2 or abs(knockbackVel[1])>2){
 	knockbackVel[0]*=.96
 	knockbackVel[1]*=.96

@@ -4,6 +4,7 @@ if not me.invincible{
 	if(not global.mute){
 		audio_play_sound(punch_sf,1,0)
 	}
+	me.alarm[0]=-1 //Cancel hitbox of incoming punch
 	me.hp-=1
 	me.alarm[2]=me.iFrames
 	me.col=c_red
