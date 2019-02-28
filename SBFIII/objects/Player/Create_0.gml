@@ -29,5 +29,3 @@ for (i = 0; i < instance_number(Player); i += 1)
 	   idx+=1
 	}
    }
-  
-show_debug_message(enemies)

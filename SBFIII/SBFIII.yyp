@@ -31,6 +31,14 @@
     },
     "resources": [
         {
+            "Key": "0153e93e-f0f3-47af-9813-e80f84937406",
+            "Value": {
+                "id": "1ec524ac-1cb7-4d17-8387-bc79cff1c24a",
+                "resourcePath": "sounds\\themeSong_sf\\themeSong_sf.yy",
+                "resourceType": "GMSound"
+            }
+        },
+        {
             "Key": "0bc16456-82ba-4797-9605-3ecbb1463680",
             "Value": {
                 "id": "315273d8-0d83-4e17-b83d-3404525804a3",
@@ -76,6 +84,14 @@
                 "id": "c893326b-72e8-4ecb-9b0c-69acb89fbcfd",
                 "resourcePath": "objects\\Player\\Player.yy",
                 "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "2d4ec009-bd4e-48e8-ae8d-6fcb8c6d0ab6",
+            "Value": {
+                "id": "1907ecb4-e8a1-4f27-ab6f-147d0089d529",
+                "resourcePath": "sounds\\punch_sf\\punch_sf.yy",
+                "resourceType": "GMSound"
             }
         },
         {
@@ -303,6 +319,14 @@
             }
         },
         {
+            "Key": "ee94f64d-b001-4433-8894-9f5d0e3a88b9",
+            "Value": {
+                "id": "3b9585c8-5c74-4b4f-b459-4c15951b5251",
+                "resourcePath": "scripts\\checkForKeyboardInput\\checkForKeyboardInput.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "f26288e2-1605-4df8-aaea-a03f9e30dade",
             "Value": {
                 "id": "4bf3a6a4-9c81-4aab-bff0-935052246d13",
@@ -336,7 +360,8 @@
         "18c19ce2-cd6a-4438-9364-a1d9e4060381",
         "65b3cdde-046e-430b-9534-d40fd202359c",
         "e4b80161-d3a6-414c-8d5a-3e8b78293a6c",
-        "c824a6f5-5c9b-4c99-a722-7ee6cd4e9f93"
+        "c824a6f5-5c9b-4c99-a722-7ee6cd4e9f93",
+        "ee94f64d-b001-4433-8894-9f5d0e3a88b9"
     ],
     "tutorial": ""
 }
