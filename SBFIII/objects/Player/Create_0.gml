@@ -1,7 +1,8 @@
-Speed = 200
+maxSpeed= 225
+Speed = maxSpeed
 dir   = 0
-angle=0
-turnSpeed = 120
+angle = 0
+turnSpeed = 200
 image_xscale=3
 image_yscale=3
 curr_animation=[0,1]
@@ -10,11 +11,13 @@ arm = 1 //1 represents right arm. -1 represents left arm
 maxHp=4
 hp = maxHp
 invincible=false
-iFrames=35
+iFrames=1*room_speed
 col=c_white
 knockbackVel = [0,0]
 team=1 //Currently only used for drawing heart sprites
-
+knockbackPower=1000
+knockbackFriction=.9
+spr=minotaur_s
 
 upkey=ord("W")
 downkey=ord("S")

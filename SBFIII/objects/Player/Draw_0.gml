@@ -1,6 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
-draw_sprite_ext(minotaur_s, image_index, x,y, 3,3, angle, col, 1)
+draw_sprite_ext(spr, image_index, x,y, 3,3, angle, col, 1)
 /*var yvel = -1* Speed * sin(angle*pi/180) * dt
 var r = bbox_right-32
 var l = bbox_left

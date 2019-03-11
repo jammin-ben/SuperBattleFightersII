@@ -5,16 +5,16 @@ if not me.invincible{
 		audio_play_sound(punch_sf,1,0)
 	}
 	me.alarm[0]=-1 //Cancel hitbox of incoming punch
+	me.alarm[1]=me.iFrames-20 //Become free
+	me.alarm[2]=me.iFrames //become vincible
 	me.hp-=1
-	me.alarm[2]=me.iFrames
 	me.col=c_red
 	me.invincible=true
-	me.knockbackVel=[1000,1000]
+	me.knockbackVel=[me.knockbackPower,me.knockbackPower]
 	me.knockbackVel[0]*=cos(angle*pi/180)
 	me.knockbackVel[1]*=-sin(angle*pi/180)
 	
 	me.free = false // Apply Stun
-	me.alarm[1]=1*room_speed //Free up after 1 second
 	me.curr_animation = [0,1]
 
 	if(me.hp<=0)

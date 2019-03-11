@@ -1,14 +1,14 @@
-up    = keyboard_check(upkey)
-down  = keyboard_check(downkey)
-left  = keyboard_check(leftkey)
-right = keyboard_check(rightkey)
-atk   = keyboard_check_pressed(punchkey)
+var up    = keyboard_check(upkey)
+var down  = keyboard_check(downkey)
+var left  = keyboard_check(leftkey)
+var right = keyboard_check(rightkey)
+var atk   = keyboard_check_pressed(punchkey)
 
 if atk
 	punch()
 
 else if right and up{
-	dir = 45	
+	dir = 45
 	move()
 	rotate()
 }
@@ -45,6 +45,7 @@ else if left{
 else if right{ 
 	dir = 0
 	move()
+	
 	rotate()
 }	
 else

@@ -10,13 +10,14 @@ if !collision_rectangle(r+xxvel,t+yyvel,l+xxvel,b+yyvel,Wall,0,1){
 	x+=knockbackVel[0]*dt
 	y+=knockbackVel[1]*dt
 }
+
 else{
 	knockbackVel[0]=0	
 	knockbackVel[1]=0
 }
-if(abs(knockbackVel[0])>2 or abs(knockbackVel[1])>2){
-	knockbackVel[0]*=.96
-	knockbackVel[1]*=.96
+if(abs(knockbackVel[0])>20 or abs(knockbackVel[1])>20){
+	knockbackVel[0]*=knockbackFriction
+	knockbackVel[1]*=knockbackFriction
 }
 else{
 	knockbackVel=[0,0]	
