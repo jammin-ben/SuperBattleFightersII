@@ -3,9 +3,14 @@ var down  = keyboard_check(downkey)
 var left  = keyboard_check(leftkey)
 var right = keyboard_check(rightkey)
 var atk   = keyboard_check_pressed(punchkey)
+var chrge = keyboard_check_pressed(chargekey) 
+
 
 if atk
 	punch()
+
+else if (chrge and canCharge)
+	charge()
 
 else if right and up{
 	dir = 45

@@ -3,6 +3,7 @@ Speed = maxSpeed
 dir   = 0
 angle = 0
 turnSpeed = 200
+charging=false
 image_xscale=3
 image_yscale=3
 curr_animation=[0,1]
@@ -18,12 +19,14 @@ team=1 //Currently only used for drawing heart sprites
 knockbackPower=1000
 knockbackFriction=.9
 spr=minotaur_s
+canCharge=true
 
 upkey=ord("W")
 downkey=ord("S")
 leftkey=ord("A")
 rightkey=ord("D")
 punchkey=ord("E")
+chargekey=ord("Q")
 
 //Init array of enemy ids
 var i;

@@ -10,10 +10,16 @@ var t = bbox_top
 var otherdude = collision_rectangle(r+xvel,t+yvel,l+xvel,b+yvel,Player,0,1)
 var otherdudeAtWall = false
 if otherdude!=noone{
-	xvel*=1/2
-	yvel*=1/2
-	otherdudeAtWall=script_execute(getPushed,otherdude,xvel,yvel) //Push and find out if I can continue moving 
-	//*
+	if (!charging){
+		xvel*=1/2
+		yvel*=1/2
+		otherdudeAtWall=script_execute(getPushed,otherdude,xvel,yvel) //Push and find out if I can continue moving 
+	}
+	else{
+		otherdudeAtWall=script_execute(getPushed,otherdude,xvel,yvel) 
+		getHit(otherdude,angle)
+		Speed = 50
+	}
 }
 if(!otherdudeAtWall) {
 	if(xvel >= 0 and yvel < 0){ //Going right-up
