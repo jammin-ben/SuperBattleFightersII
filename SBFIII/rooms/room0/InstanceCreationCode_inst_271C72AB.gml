@@ -1,0 +1,9 @@
+upkey=ord("T")
+downkey=ord("G")
+leftkey=ord("F")
+rightkey=ord("H")
+punchkey=ord("Y")
+chargekey=ord("R")
+angle=45
+team=3
+spr=holstein_s
