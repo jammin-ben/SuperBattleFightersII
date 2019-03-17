@@ -3,3 +3,5 @@
 free = true
 charging=false
 Speed=maxSpeed
+curr_animation=[0,1]
+

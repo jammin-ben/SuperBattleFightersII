@@ -95,6 +95,14 @@
             }
         },
         {
+            "Key": "1d048ef5-8a80-4dc9-953b-28f6c98c7cce",
+            "Value": {
+                "id": "76b9632d-9011-4ac0-8c37-b0138f84ffb5",
+                "resourcePath": "tilesets\\lava_ts\\lava_ts.yy",
+                "resourceType": "GMTileSet"
+            }
+        },
+        {
             "Key": "1edfbc2f-73bb-4e0b-abc2-69e4c54951e2",
             "Value": {
                 "id": "682b2002-c179-41f2-b82b-e0135c3daf57",
@@ -279,6 +287,14 @@
             }
         },
         {
+            "Key": "8b2daa72-1b2c-4dde-8474-75c592a78739",
+            "Value": {
+                "id": "bcd2057d-7182-4646-b74e-a1fb5bd78e35",
+                "resourcePath": "sprites\\lava_hitbox_s\\lava_hitbox_s.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "8db64303-025a-400c-9c35-d0bfe4414566",
             "Value": {
                 "id": "c682129f-8a79-486a-ac0d-75d5ee4d2013",
@@ -375,6 +391,14 @@
             }
         },
         {
+            "Key": "c8d48797-7e7f-48c2-8a16-96beb69b2f0c",
+            "Value": {
+                "id": "51f55ba3-7aeb-4ee8-9487-d750ecee8f71",
+                "resourcePath": "objects\\LAVA\\LAVA.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "cc98d028-7bdd-4680-85f3-c87a7baa481e",
             "Value": {
                 "id": "e9f5688c-5ac6-46a1-9342-4eeb4dc4bfd2",
@@ -388,6 +412,14 @@
                 "id": "92676cfe-c445-4004-a762-9aa66add5c8a",
                 "resourcePath": "scripts\\rotate\\rotate.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "d3a386b3-597b-42b9-a4d9-0d1c82b816ae",
+            "Value": {
+                "id": "3d2b2370-09aa-4529-847b-1d7fa85f1100",
+                "resourcePath": "sprites\\lava_tiles_s\\lava_tiles_s.yy",
+                "resourceType": "GMSprite"
             }
         },
         {

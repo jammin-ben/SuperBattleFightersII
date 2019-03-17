@@ -10,34 +10,37 @@ var t = bbox_top
 draw_rectangle_color(r,t,l,t+yvel,c_red,c_red,c_red,c_red,0)
 draw_rectangle_color(r,t,l,b,c_white,c_white,c_white,c_white,0)*/
 
+var offsetx = 100
+var offsety = 40
+
 for(var i =0; i<maxHp; i++){
 	if(team==1){
 		if(hp>i){//red heart
-			draw_sprite(heart_s,0,100+32*i,85)
+			draw_sprite(heart_s,0,offsetx+32*i,offsety)
 		}
 		else
-			draw_sprite(heart_s,1,100+32*i,85)
+			draw_sprite(heart_s,1,offsetx+32*i,offsety)
 	}		
 	else if (team==2){ //team==2
 		if(hp>i){//red heart
-			draw_sprite(heart_s,0,room_width-100-32*i,85)
+			draw_sprite(heart_s,0,room_width-offsetx-32*i,offsety)
 		}
 		else
-			draw_sprite(heart_s,1,room_width-100-32*i,85)
+			draw_sprite(heart_s,1,room_width-offsetx-32*i,offsety)
 	}
 	else if (team==3){
 		if(hp>i){
-			draw_sprite(heart_s,0,100+32*i,room_height-85)
+			draw_sprite(heart_s,0,offsetx+32*i,room_height-offsety)
 		}
 		else
-			draw_sprite(heart_s,1,100+32*i,room_height-85)
+			draw_sprite(heart_s,1,offsetx+32*i,room_height-offsety)
 	}
 	else if (team==4){
 		if(hp>i){
-			draw_sprite(heart_s,0,room_width-100-32*i,room_height-85)
+			draw_sprite(heart_s,0,room_width-offsetx-32*i,room_height-offsety)
 		}
 		else
-			draw_sprite(heart_s,1,room_width-100-32*i,room_height-85)
+			draw_sprite(heart_s,1,room_width-offsetx-32*i,room_height-offsety)
 	}
 	
 }

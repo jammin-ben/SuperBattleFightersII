@@ -8,6 +8,7 @@ image_xscale=3
 image_yscale=3
 curr_animation=[0,1]
 free = true
+depth = 150
 arm = 1 //1 represents right arm. -1 represents left arm
 maxHp=4
 hp = maxHp
