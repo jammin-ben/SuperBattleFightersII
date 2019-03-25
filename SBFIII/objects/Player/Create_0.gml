@@ -21,6 +21,8 @@ knockbackPower=1000
 knockbackFriction=.9
 spr=minotaur_s
 canCharge=true
+xvel = 0
+yvel = 0
 
 upkey=ord("W")
 downkey=ord("S")

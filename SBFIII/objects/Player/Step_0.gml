@@ -11,3 +11,5 @@ animate()
 if(charging){
 	move()
 }
+//Step 1: consolidate movement script
+//Step 2: create collision check in movement script for other bull which is recursive

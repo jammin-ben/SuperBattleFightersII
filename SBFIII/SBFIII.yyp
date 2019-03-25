@@ -55,6 +55,14 @@
             }
         },
         {
+            "Key": "0749958b-e004-4b66-bd08-d8bf18f295c4",
+            "Value": {
+                "id": "672ac78f-c06a-4cb0-9d49-8895728aa4c1",
+                "resourcePath": "objects\\Medkit_Spawner\\Medkit_Spawner.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "0bc16456-82ba-4797-9605-3ecbb1463680",
             "Value": {
                 "id": "315273d8-0d83-4e17-b83d-3404525804a3",
@@ -135,6 +143,14 @@
             }
         },
         {
+            "Key": "30c5300c-d6b8-40dc-aed3-64954f1dd3a6",
+            "Value": {
+                "id": "31d4b0d1-198a-47ab-b5e9-504646996ece",
+                "resourcePath": "rooms\\two_player_room\\two_player_room.yy",
+                "resourceType": "GMRoom"
+            }
+        },
+        {
             "Key": "330c1876-1bd3-4c40-b2eb-5b9b49859b6b",
             "Value": {
                 "id": "be3feb0a-91ec-4dc5-a0ba-063da9aea4de",
@@ -194,8 +210,16 @@
             "Key": "49033b3f-123f-433d-8f76-e19e569b8949",
             "Value": {
                 "id": "e857e04f-54b8-47d6-98c5-96d9960362bb",
-                "resourcePath": "rooms\\room0\\room0.yy",
+                "resourcePath": "rooms\\four_player_room\\four_player_room.yy",
                 "resourceType": "GMRoom"
+            }
+        },
+        {
+            "Key": "4bdae374-6acb-4537-9e0a-00a51087883e",
+            "Value": {
+                "id": "27902f0f-f86b-48b5-a38b-21a870076471",
+                "resourcePath": "sprites\\medkit_s\\medkit_s.yy",
+                "resourceType": "GMSprite"
             }
         },
         {
@@ -247,6 +271,14 @@
             }
         },
         {
+            "Key": "67fddb7c-f562-4134-abc9-5edcededddf2",
+            "Value": {
+                "id": "eb033ef5-47ca-4a6d-bf94-9fcbf38519a3",
+                "resourcePath": "rooms\\menu_room\\menu_room.yy",
+                "resourceType": "GMRoom"
+            }
+        },
+        {
             "Key": "7b3581c6-42bf-4126-ac9b-a199c0839c18",
             "Value": {
                 "id": "68dc0507-c6b4-4d4b-a2b7-06b1b6fba298",
@@ -276,6 +308,14 @@
                 "id": "d25f31f5-85f1-44ae-9aab-328289853f6b",
                 "resourcePath": "objects\\Control\\Control.yy",
                 "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "895d3e73-4387-40c7-b8c9-df1d1205535b",
+            "Value": {
+                "id": "83953bc0-88b1-4e27-ab3b-6f36cc6f3780",
+                "resourcePath": "sprites\\sprite17\\sprite17.yy",
+                "resourceType": "GMSprite"
             }
         },
         {
@@ -356,6 +396,14 @@
                 "id": "07c7cc7c-f728-4d7e-aa2a-7798eab695ba",
                 "resourcePath": "sprites\\wall_s\\wall_s.yy",
                 "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "ba6bd588-89d8-4920-b2a5-e40a9ff7b542",
+            "Value": {
+                "id": "41e2009f-1de5-4290-a06b-e0fc52ca3c40",
+                "resourcePath": "objects\\Medkit\\Medkit.yy",
+                "resourceType": "GMObject"
             }
         },
         {

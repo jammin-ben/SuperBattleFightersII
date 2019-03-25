@@ -1,0 +1,9 @@
+upkey=vk_up
+downkey=vk_down
+leftkey=vk_left
+rightkey=vk_right
+punchkey=vk_rshift
+chargekey=191
+angle=180
+team=2
+spr=skinotaur_s
